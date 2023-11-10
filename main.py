@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import LabelEncoder
 import surprise
 from surprise import KNNBasic
 from surprise import Dataset
@@ -52,10 +53,11 @@ recruitment_nums =  recruitment_df[['employee']]
 # 모든 데이터 타입를 하나의 리스트로 합침
 all_texts = pd.concat([resume_texts, recruitment_texts], ignore_index=True)
 
+all_categories = pd.concat([resume_categories, recruitment_categories], ignore_index=True)
 
-# 시각화
-recruitment_df.columns
-resume_df.columns
+#categories 라벨 인코딩
+all_categories.apply(LabelEncoder().fit_transform)
+all_categories
 
 # TF-IDF 벡터화
 tfidf_vectorizer = TfidfVectorizer()
